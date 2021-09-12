@@ -17,6 +17,8 @@ class RegistroActivity : AppCompatActivity() {
 
     private lateinit var  registroBinding: ActivityRegistroBinding
 
+    //Crear auth para Firebase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
         supportActionBar!!.setIcon(R.mipmap.ic_launcher_round)
