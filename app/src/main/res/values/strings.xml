@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">WhimFood_ver2</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="todo">TODO</string>
+    <string name="email">Correo electrónico</string>
+    <string name="requiered_field">Campo requerido</string>
+    <string name="password">Contraseña</string>
+    <string name="login_butto_text">INGRESAR</string>
+    <string name="register_text_link">No tienes cuenta, Registrate aquí</string>
+    <string name="regieter_account_title">CREA UNA NUEVA CUENTA</string>
+    <string name="full_name">Nombre Completo</string>
+    <string name="password_register">Contraseña</string>
+    <string name="password_repeated">Repetir  Contraseña</string>
+    <string name="register_button_msm">Registrarse</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="email_error">Ingresar correo electrónico</string>
+    <string name="login_error">Correo o contraseña invalidos</string>
+    <string name="password_error">Las constraseñas deben ser iguales</string>
+    <string name="login1">Iniciar sesión</string>
+    <string name="pas1">Las contraseñas deben ser iguales</string>
+    <string name="welcome">WELCOME TO YOUR FAVORITE PLACE</string>
+    <string name="register_text_link1">Registrate aquí</string>
+    <string name="cuenta">¿No tienes una cuenta aún?</string>
+    <string name="img">registro</string>
+    <string name="fullname1">Nombre de usuario</string>
+    <string name="PR">Repetir contraseña</string>
+    <string name="password_digits">La contraseña debe tener minimo 6 dígitos</string>
+    <string name="missing_parameters">Ingresar parámetros faltantes</string>
+    <string name="fullname2">Nombre completo</string>
+    <string name="spaces">Parametros ingresados incorrectos</string>
+    <string name="espacios">Parametros ingresados correctamente (Asegurese de incluir letras y palabras, no solo espacios)</string>
+    <string name="spaes1">Parametros ingresados incorrectamente (Debe incluir letras, palabras o números)</string>
+    <string name="spaces2">Llene los campos vacíos</string>
+    <string name="spaces3">Llene los espacios en blanco</string>
+</resources>
