@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "650139161948",
+    "project_id": "whimfood-c6f64",
+    "storage_bucket": "whimfood-c6f64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650139161948:android:83db18ba9814978adb5d99",
+        "android_client_info": {
+          "package_name": "com.hsofiamunoz.bottomnavigation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650139161948-quk9kuekcu6arii3fogep9p0gkqk9885.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO7RLr7Q6ZvcRCNnHVVsokHV-sj13PK54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650139161948-quk9kuekcu6arii3fogep9p0gkqk9885.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650139161948:android:86bd73b77eb570b0db5d99",
+        "android_client_info": {
+          "package_name": "com.hsofiamunoz.whimfood_ver2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650139161948-quk9kuekcu6arii3fogep9p0gkqk9885.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAO7RLr7Q6ZvcRCNnHVVsokHV-sj13PK54"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650139161948-quk9kuekcu6arii3fogep9p0gkqk9885.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
