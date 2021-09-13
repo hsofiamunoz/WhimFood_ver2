@@ -1,4 +1,4 @@
-package com.hsofiamunoz.whimfood_ver2.ui.notifications
+package com.hsofiamunoz.whimfood_ver2.ui.Profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.hsofiamunoz.whimfood_ver2.R
-import com.hsofiamunoz.whimfood_ver2.databinding.FragmentNotificationsBinding
+import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
 
-class NotificationsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
-    private var _binding: FragmentNotificationsBinding? = null
+    private lateinit var profileViewModel: ProfileViewModel
+    private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,15 +24,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        profileViewModel =
+            ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+        profileViewModel.text.observe(viewLifecycleOwner, Observer {
+            //textView.text = it
         })
         return root
     }
