@@ -7,7 +7,6 @@ import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -15,7 +14,8 @@ import com.google.firebase.ktx.Firebase
 import com.hsofiamunoz.whimfood_ver2.LoginActivity
 import com.hsofiamunoz.whimfood_ver2.R
 import com.hsofiamunoz.whimfood_ver2.databinding.ActivityRegistroBinding
-import com.hsofiamunoz.whimfood_ver2.model.User
+import com.hsofiamunoz.whimfood_ver2.data.User
+import com.hsofiamunoz.whimfood_ver2.data.profileServer.profileServer
 
 private const val SPACE= " "
 private const val EMPTY = ""
@@ -134,7 +134,10 @@ class RegistroActivity : AppCompatActivity() {
         var id = auth.currentUser?.uid
         id?.let {id ->
             val name = registroBinding.fullnameRegisterInputText.text.toString()
-            val user = User(id = id, email = email,name = name)
+            //val user = User(id = id, email = email,name = name)
+            val user = profileServer(id = id, email = email,name = name,description = "",adress= "",
+                url_picture = "",followers = 0,following=0)
+
             val db = Firebase.firestore
 
             db.collection("users").document(id)
@@ -151,6 +154,5 @@ class RegistroActivity : AppCompatActivity() {
         }
 
     }
-
 
 }

@@ -34,7 +34,7 @@
     <string name="spaes1">Parametros ingresados incorrectamente (Debe incluir letras, palabras o números)</string>
     <string name="spaces2">Llene los campos vacíos</string>
     <string name="spaces3">Llene los espacios en blanco</string>
-    <string name="profile_name">Nombre</string>
+    <string name="profile_name">Maria</string>
     <string name="description_example">Amante de la comida mexicana</string>
     <string name="profile_pic" />
     <string name="adress_example">Medellin</string>
@@ -42,4 +42,9 @@
     <string name="following_ex">15</string>
     <string name="edit_profile">Editar</string>
     <string name="title_discover">Descubre</string>
+    <string name="take_picture_content">Tomar foto</string>
+    <string name="guardar">Guardar</string>
+    <string name="description">Descripción</string>
+    <string name="adress_hint">Dirección</string>
+    <string name="name_hint">Nombre</string>
 </resources>

@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
         // FireBase
         auth = Firebase.auth
 
-        //val data = intent.extras
+        val data = intent.extras
 
         // Botón para cambiar de login a main, iniciar sesión
         loginBinding.loginButton.setOnClickListener{
@@ -117,6 +117,7 @@ class LoginActivity : AppCompatActivity() {
                     val user = auth.currentUser
                     val intent = Intent(this, MainActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
+                    intent.putExtra("email", email)
                     startActivity(intent)
                     finish()
                 }

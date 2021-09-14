@@ -8,90 +8,111 @@
     tools:context=".ui.Profile.ProfileFragment">
 
     <ImageView
-        android:id="@+id/profile_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/profile_pic"
+        android:id="@+id/take_picture_profile_image_view"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/take_picture_content"
+        android:src="@drawable/ic_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/name_profile_text_view"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_text_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/profile_name"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_image_view" />
+        app:layout_constraintTop_toBottomOf="@+id/take_picture_profile_image_view">
 
-    <TextView
-        android:id="@+id/description_profile_text_view"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_input_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_hint"
+            tools:ignore="TextContrastCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description_text_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/description_example"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name_profile_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/name_text_input_layout">
 
-    <TextView
-        android:id="@+id/adress_profile_text_view"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/description_input_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/description" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/adress_text_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/adress_example"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_profile_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/description_text_input_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/adress_input_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/adress_hint"
+            tools:ignore="TextContrastCheck" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/follower_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="51dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/followers_ex"
         app:layout_constraintEnd_toStartOf="@+id/following_text_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adress_profile_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/adress_text_input_layout" />
 
     <TextView
         android:id="@+id/following_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="71dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/following_ex"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/follower_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/adress_profile_text_view" />
+        app:layout_constraintTop_toBottomOf="@+id/adress_text_input_layout" />
 
     <Button
         android:id="@+id/edit_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="50dp"
+        android:layout_weight="1"
         android:text="@string/edit_profile"
         android:textColor="@color/white"
         android:textColorLink="@color/white"
+        app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/follower_text_view" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
