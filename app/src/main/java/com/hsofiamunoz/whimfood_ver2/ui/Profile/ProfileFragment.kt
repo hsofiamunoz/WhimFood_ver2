@@ -134,6 +134,7 @@ class ProfileFragment : Fragment() {
             val adress =  adressInputText.text.toString()
 
             val db = Firebase.firestore
+        // falta sacar los id del perfil.
 
             val adressRef = db.collection("users").document("UQI9lEEAUBQGsrttwWG1CjhAS2E3")
             adressRef.update("adress","adress").addOnSuccessListener { Log.d("Actualizado","exito") }
