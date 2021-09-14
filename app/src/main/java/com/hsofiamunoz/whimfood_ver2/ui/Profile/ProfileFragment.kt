@@ -128,6 +128,8 @@ class ProfileFragment : Fragment() {
     }
 
 
+
+
     private fun saveProfileChanges(downloadUri: String) {
         with(binding){
             val name =  nameInputText.text.toString()
