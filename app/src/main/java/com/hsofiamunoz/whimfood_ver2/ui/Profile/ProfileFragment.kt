@@ -135,8 +135,6 @@ class ProfileFragment : Fragment() {
 
             val db = Firebase.firestore
 
-            //comentario
-
             val adressRef = db.collection("users").document("UQI9lEEAUBQGsrttwWG1CjhAS2E3")
             adressRef.update("adress","adress").addOnSuccessListener { Log.d("Actualizado","exito") }
                 .addOnFailureListener { e -> Log.w("Actualizado", "Error updating document", e) }
