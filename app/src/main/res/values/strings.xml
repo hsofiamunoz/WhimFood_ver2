@@ -34,4 +34,17 @@
     <string name="spaes1">Parametros ingresados incorrectamente (Debe incluir letras, palabras o números)</string>
     <string name="spaces2">Llene los campos vacíos</string>
     <string name="spaces3">Llene los espacios en blanco</string>
+    <string name="imagen_producto">imagen producto</string>
+    <string name="name_product_example">Sandwich Qbano</string>
+    <string name="price_product_example">20000</string>
+    <string name="description">Descripción</string>
+    <string name="picture">Agrega una Foto</string>
+    <string name="title_discover">Descubre</string>
+    <string name="title_create_product">Crear</string>
+    <string name="imagen">imagen</string>
+    <string name="name_product_hint">Nombre del plato</string>
+    <string name="prie_product_hint">Precio</string>
+    <string name="add_product">Agregar</string>
+    <string name="nombre_product">Nombre:</string>
+    <string name="price_product">Precio:</string>
 </resources>

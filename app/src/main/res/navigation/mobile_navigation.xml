@@ -12,14 +12,20 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.hsofiamunoz.whimfood_ver2.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_discover"
+        android:name="com.hsofiamunoz.whimfood_ver2.ui.discover.DiscoverFragment"
+        android:label="@string/title_discover"
+        tools:layout="@layout/fragment_discover" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.hsofiamunoz.whimfood_ver2.ui.notifications.NotificationsFragment"
+        android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_create_product"
+        android:name="com.hsofiamunoz.whimfood_ver2.ui.createProduct.createProductFragment"
+        android:label="@string/add_product"
+        tools:layout="@layout/create_product_fragment" />
 </navigation>

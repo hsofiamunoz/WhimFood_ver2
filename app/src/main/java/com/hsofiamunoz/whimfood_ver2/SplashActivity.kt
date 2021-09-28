@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.content.Intent
 import android.view.Window
 import com.hsofiamunoz.whimfood_ver2.LoginActivity
+import com.hsofiamunoz.whimfood_ver2.MainActivity
 import com.hsofiamunoz.whimfood_ver2.R
 import java.util.*
 import kotlin.concurrent.timerTask

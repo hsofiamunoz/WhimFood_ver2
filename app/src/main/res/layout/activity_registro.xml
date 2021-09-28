@@ -11,7 +11,7 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="213dp"
+        android:layout_height="171dp"
         android:layout_gravity="center"
         android:contentDescription="@string/img"
         app:srcCompat="@drawable/imalogin" />
@@ -104,7 +104,8 @@
             android:layout_marginTop="10dp"
             android:background="@color/md_indigo_100"
             android:hint="@string/PR"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:ignore="TextContrastCheck" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
