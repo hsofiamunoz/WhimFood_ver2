@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_discover" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.NotificationsFragment"
+        android:id="@+id/navigation_profile"
+        android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/navigation_create_product"

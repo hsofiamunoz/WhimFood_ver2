@@ -47,4 +47,7 @@
     <string name="add_product">Agregar</string>
     <string name="nombre_product">Nombre:</string>
     <string name="price_product">Precio:</string>
+    <string name="title_profile">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
