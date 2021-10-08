@@ -36,5 +36,9 @@
         android:id="@+id/editProfileFragment"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.EditProfileFragment"
         android:label="fragment_edit_profile"
-        tools:layout="@layout/fragment_edit_profile" />
+        tools:layout="@layout/fragment_edit_profile" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_navigation_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
 </navigation>

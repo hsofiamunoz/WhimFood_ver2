@@ -55,4 +55,5 @@
 
     <string name="take_picture_content">Tomar foto</string>
     <string name="save_profile_changes">GUARDAR</string>
+    <string name="adress_hint">Dirección</string>
 </resources>

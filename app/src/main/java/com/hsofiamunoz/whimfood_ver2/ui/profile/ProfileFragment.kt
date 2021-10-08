@@ -9,8 +9,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -39,10 +46,45 @@ class ProfileFragment : Fragment() {
             //textView.text = it
         })
 
-        //var id = auth.currentUser?.uid
-        //Log.d("Id_user",id.toString())
-        binding.nameProfileTextView.setText("hi")
-        //binding.nameProfileTextView.setText(id.toString())
+
+        val current_user = Firebase.auth.currentUser
+        var email = ""
+        var id = ""
+
+        // Obtener el id y correo
+        current_user?.let {
+            id = current_user.uid.toString()
+            Log.d("id del user",id)
+
+            for(profile in it.providerData){
+                email = profile.email.toString()
+                Log.d("email del user",email)
+            }
+        }
+
+        var db = Firebase.firestore
+        //Acceder a la BD --------------------------------------------------------------------------
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    var persona1: UserProfile = document.toObject<UserProfile>()
+                    if (document.id == id) {
+                        Log.d("name", document.data.get("name") as String)
+                        //binding.nameProfileTextView.setText(document.data.get("name") as String)
+                        binding.nameProfileTextView.setText(persona1.name)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Error", "Error getting documents.", exception)
+            }
+
+        // -----------------------------------------------------------------------------------------
+
+        binding.editProfileButton.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionNavigationProfileToEditProfileFragment()   )
+        }
 
         return root
     }

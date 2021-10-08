@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.hsofiamunoz.whimfood_ver2.R
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentEditProfileBinding
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
@@ -30,6 +31,14 @@ class EditProfileFragment : Fragment() {
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
+        // Al guardar los cambios
+        binding.saveChangesButton.setOnClickListener {
+            //Se regresa al perfil
+            val name_edit = binding.nameInputText
+            findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationProfile())
+        }
 
         return root
     }
