@@ -50,4 +50,9 @@
     <string name="title_profile">Perfil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_profile">EDITAR</string>
+    <string name="name_hint">Nombre</string>
+
+    <string name="take_picture_content">Tomar foto</string>
+    <string name="save_profile_changes">GUARDAR</string>
 </resources>

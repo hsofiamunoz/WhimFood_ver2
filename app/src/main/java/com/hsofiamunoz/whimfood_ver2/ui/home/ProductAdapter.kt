@@ -40,7 +40,7 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
         fun bind(product: Product){
             with(binding){
                 productNameTextView.text = product.product_name
-                productPriceTextView.text = product.product_price.toString()
+                //productPriceTextView.text = product.product_price.toString()
                 if(product.url_product_pic!=null){
                     Picasso.get().load(product.url_product_pic).into(productImageView)
                 }

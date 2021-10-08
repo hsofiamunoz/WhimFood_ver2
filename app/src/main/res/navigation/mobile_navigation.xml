@@ -21,11 +21,20 @@
         android:id="@+id/navigation_profile"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_create_product"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.createProduct.createProductFragment"
         android:label="@string/add_product"
         tools:layout="@layout/create_product_fragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>
