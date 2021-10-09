@@ -1,27 +1,44 @@
 package com.hsofiamunoz.whimfood_ver2.ui.profile
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Picture
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask
 import com.hsofiamunoz.whimfood_ver2.R
+import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentEditProfileBinding
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
+import com.hsofiamunoz.whimfood_ver2.ui.createProduct.CreateProductViewModel
+import java.io.ByteArrayOutputStream
 
 class EditProfileFragment : Fragment() {
 
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }*/
+    // Variable para subir la imagen
+    private var urlImage :String ?=null
+    private val REQUEST_IMAGE_CAPTURE = 1000
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,17 +47,120 @@ class EditProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val current_user = Firebase.auth.currentUser
+        var id = ""
 
+        //tomar captura de la imagen
+
+        with(binding){
+            takePictureProfileImageView4.setOnClickListener{
+                dispatchTakePictureProfileIntent()
+            }
+        }
 
 
         // Al guardar los cambios
         binding.saveChangesButton.setOnClickListener {
             //Se regresa al perfil
             val name_edit = binding.nameInputText
-            findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationProfile())
+            savePicture()
+
+            findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationHome())
         }
 
         return root
+    }
+    private fun savePicture() {
+
+        val storage = FirebaseStorage.getInstance()
+        val pictureRef = storage.reference.child("users")
+
+        binding.takePictureProfileImageView4.isDrawingCacheEnabled = true
+        binding.takePictureProfileImageView4.buildDrawingCache()
+
+        val bitmap = (binding.takePictureProfileImageView4.drawable as BitmapDrawable).bitmap
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos)
+        // data es la foto comprimida para subirla a la nube
+        val data = baos.toByteArray()
+
+        val uploadTask = pictureRef.putBytes(data)
+
+        val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+            if (!task.isSuccessful) {
+                task.exception?.let {
+                    throw it
+                }
+            }
+            pictureRef.downloadUrl
+        }).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val downloadUri = task.result
+                // Se guardan los cambios
+                saveChangesProfile(downloadUri.toString())
+            } else {
+            }
+        }
+    }
+
+    private fun saveChangesProfile(urlPicture: String) {
+        val newName = binding.nameInputText.text.toString()
+        val db = Firebase.firestore
+        val current_user= Firebase.auth.currentUser
+        var id= ""
+        current_user?.let {
+            id = current_user.uid.toString()
+            //Log.d("id del user",id)
+
+        }
+
+        db.collection("users").get().addOnSuccessListener { result ->
+            var usersExist = false
+            for(document in result){
+                val user: UserProfile = document.toObject<UserProfile>()
+                if (user.name == document.data.get("name") as String){
+                    id = user.id.toString()
+                    usersExist = true
+                }
+            }
+            Log.d("idUser", id)
+            if(!usersExist)
+                Toast.makeText(requireContext(),"No existe",Toast.LENGTH_SHORT).show()
+        }
+        //actualizar información
+        val documentUpdate = HashMap<String,Any>()
+        documentUpdate["name"] =  newName
+        documentUpdate["urlPicture"] = urlPicture
+
+
+
+        id?.let { it1 -> db.collection("users").document(it1).update(documentUpdate).addOnSuccessListener {
+            Toast.makeText(requireContext(),"Usuario actualizado exitosamente",Toast.LENGTH_SHORT).show()
+        } }
+
+
+
+    }
+
+    private fun dispatchTakePictureProfileIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent->
+            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
+                startActivityForResult(takePictureIntent,REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
+        if(requestCode== REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
+            val imageBitmap = data?.extras?.get("data") as Bitmap
+            binding.takePictureProfileImageView4.setImageBitmap(imageBitmap)
+        }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        //viewModel = ViewModelProvider(this).get(CreateProductViewModel::class.java)
+
     }
 
 }

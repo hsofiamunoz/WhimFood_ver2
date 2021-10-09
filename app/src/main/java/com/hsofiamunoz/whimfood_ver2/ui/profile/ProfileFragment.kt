@@ -19,6 +19,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
+import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
@@ -71,8 +72,12 @@ class ProfileFragment : Fragment() {
                     var persona1: UserProfile = document.toObject<UserProfile>()
                     if (document.id == id) {
                         Log.d("name", document.data.get("name") as String)
-                        //binding.nameProfileTextView.setText(document.data.get("name") as String)
-                        binding.nameProfileTextView.setText(persona1.name)
+                        binding.nameProfileTextView.setText(document.data.get("name") as String)
+                        if(persona1.urlPicture!=null){
+                            Picasso.get().load(persona1.urlPicture).into(binding.imageView2)
+                        }
+
+                        //binding.nameProfileTextView.setText(persona1.name)
                     }
                 }
             }

@@ -38,7 +38,7 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" >
         <action
-            android:id="@+id/action_editProfileFragment_to_navigation_profile"
-            app:destination="@id/navigation_profile" />
+            android:id="@+id/action_editProfileFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 </navigation>
