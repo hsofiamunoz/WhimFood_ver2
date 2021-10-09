@@ -6,6 +6,7 @@ class UserProfile (
     val id: String?=null,
     val email: String?=null,
     val name: String?=null,
-    val urlPicture: String?= null
+    val urlPicture: String?= null,
+    val location: String?= null
 
 )

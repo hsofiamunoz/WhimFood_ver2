@@ -51,7 +51,7 @@
             android:id="@+id/description_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/description"
+            android:hint="@string/Ubicaci"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 

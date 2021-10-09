@@ -73,6 +73,7 @@ class ProfileFragment : Fragment() {
                     if (document.id == id) {
                         Log.d("name", document.data.get("name") as String)
                         binding.nameProfileTextView.setText(document.data.get("name") as String)
+                        binding.locationProfileTextView2.setText(document.data.get("location") as String)
                         if(persona1.urlPicture!=null){
                             Picasso.get().load(persona1.urlPicture).into(binding.imageView2)
                         }

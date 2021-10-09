@@ -39,6 +39,7 @@ class EditProfileFragment : Fragment() {
     // Variable para subir la imagen
     private var urlImage :String ?=null
     private val REQUEST_IMAGE_CAPTURE = 1000
+    private var flagFoto= false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +51,36 @@ class EditProfileFragment : Fragment() {
         val current_user = Firebase.auth.currentUser
         var id = ""
 
+        // -------------------------------------------------------
+
+        // Obtener el id y correo
+        current_user?.let {
+            id = current_user.uid.toString()
+            Log.d("id del user",id)
+
+        }
+
+        var db = Firebase.firestore
+        //Acceder a la BD --------------------------------------------------------------------------
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    var persona1: UserProfile = document.toObject<UserProfile>()
+                    if (document.id == id) {
+                        binding.nameInputText.setText(persona1.name)
+
+                    }
+                }
+            }
+
+
         //tomar captura de la imagen
 
         with(binding){
             takePictureProfileImageView4.setOnClickListener{
                 dispatchTakePictureProfileIntent()
+                flagFoto=true
             }
         }
 
@@ -62,13 +88,56 @@ class EditProfileFragment : Fragment() {
         // Al guardar los cambios
         binding.saveChangesButton.setOnClickListener {
             //Se regresa al perfil
-            val name_edit = binding.nameInputText
-            savePicture()
+            if(flagFoto==true){
+                savePicture()
+                saveDatos()
+            }
+            else{
+                saveDatos()
+            }
 
-            findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationHome())
+        }
+        return root
+    }
+
+    private fun saveDatos(){
+        var newName = binding.nameInputText.text.toString()
+        var newLocation= binding.descriptionInputText.text.toString()
+        val db = Firebase.firestore
+        val current_user= Firebase.auth.currentUser
+        var id= ""
+        current_user?.let {
+            id = current_user.uid.toString()
+            //Log.d("id del user",id)
         }
 
-        return root
+        db.collection("users").get().addOnSuccessListener { result ->
+            var usersExist = false
+            for(document in result){
+                val user: UserProfile = document.toObject<UserProfile>()
+                    if (user.id == id) {
+                        newLocation= document.data.get("location") as String
+                        newName= document.data.get("name") as String
+                        Log.d("curren12", newName)
+                        usersExist = true
+                    }
+            }
+            if(!usersExist)
+                Toast.makeText(requireContext(),"No existe",Toast.LENGTH_SHORT).show()
+        }
+        //actualizar información
+        val documentUpdate = HashMap<String,Any>()
+        documentUpdate["location"] = newLocation
+        documentUpdate["name"] =  newName
+
+        id?.let { it1 -> db.collection("users").document(it1).update(documentUpdate).addOnSuccessListener {
+            Toast.makeText(requireContext(),"Usuario actualizado exitosamente",Toast.LENGTH_SHORT).show()
+        } }
+
+
+        findNavController().navigate(EditProfileFragmentDirections.actionEditProfileFragmentToNavigationHome())
+
+
     }
     private fun savePicture() {
 
@@ -129,7 +198,6 @@ class EditProfileFragment : Fragment() {
         }
         //actualizar información
         val documentUpdate = HashMap<String,Any>()
-        documentUpdate["name"] =  newName
         documentUpdate["urlPicture"] = urlPicture
 
 
