@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.WhimFood_ver2">
+
         <activity android:name=".LoginActivity"/>
         <activity android:name="com.hsofiamunoz.whimfood.RegistroActivity"/>
         <activity android:name=".MainActivity"/>

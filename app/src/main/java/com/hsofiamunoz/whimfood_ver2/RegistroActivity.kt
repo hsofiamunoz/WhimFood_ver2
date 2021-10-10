@@ -88,7 +88,7 @@ class RegistroActivity : AppCompatActivity() {
         id?.let {id ->
             val name = registroBinding.fullnameRegisterInputText.text.toString()
             //val user = User(id = id, email = email,name = name)
-            val user = UserProfile(id = id, email = email,name = name, urlPicture = "https://firebasestorage.googleapis.com/v0/b/whimfood-ver2.appspot.com/o/picture_default.png?alt=media&token=e6430b16-ea0b-424e-bf13-91475d8ea6d5", location = "")
+            val user = UserProfile(id = id, email = email,name = name, urlPicture = "https://firebasestorage.googleapis.com/v0/b/finalfinal-936cd.appspot.com/o/picture_default.png?alt=media&token=9c879401-c79b-48ac-a2f7-3f6cc29d0b54", location = "")
 
             val db = Firebase.firestore
 
