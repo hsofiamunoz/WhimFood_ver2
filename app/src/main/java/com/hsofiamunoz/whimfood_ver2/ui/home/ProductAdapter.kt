@@ -10,7 +10,8 @@ import com.hsofiamunoz.whimfood_ver2.data.Product
 import com.hsofiamunoz.whimfood_ver2.databinding.CardViewProductItemBinding
 import com.squareup.picasso.Picasso
 
-class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private val onItemClicked:(Product) -> Unit,
+): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     private var listProduct: MutableList<Product> = mutableListOf()
 
@@ -21,6 +22,7 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(listProduct[position])
+        holder.itemView.setOnClickListener { onItemClicked(listProduct[position]) }
     }
 
     override fun getItemCount(): Int {
@@ -40,6 +42,11 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
         fun bind(product: Product){
             with(binding){
                 productNameTextView.text = product.product_name
+                locationTextView.text= product.location_product
+                nombreTextView.text= product.propietario
+                if(product.propietario_url!=null){
+                    Picasso.get().load(product.propietario_url).into(profileImageView)
+                }
                 //productPriceTextView.text = product.product_price.toString()
                 if(product.url_product_pic!=null){
                     Picasso.get().load(product.url_product_pic).into(productImageView)

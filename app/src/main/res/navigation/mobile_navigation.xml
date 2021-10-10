@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailProductFragment"
+            app:destination="@id/detailProductFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_discover"
@@ -31,7 +35,11 @@
         android:id="@+id/navigation_create_product"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.createProduct.createProductFragment"
         android:label="@string/add_product"
-        tools:layout="@layout/create_product_fragment" />
+        tools:layout="@layout/create_product_fragment" >
+        <action
+            android:id="@+id/action_navigation_create_product_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.EditProfileFragment"
@@ -40,5 +48,14 @@
         <action
             android:id="@+id/action_editProfileFragment_to_navigation_home"
             app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailProductFragment"
+        android:name="com.hsofiamunoz.whimfood_ver2.ui.home.DetailProductFragment"
+        android:label="fragment_detail_product"
+        tools:layout="@layout/fragment_detail_product" >
+        <argument
+            android:name="product"
+            app:argType="com.hsofiamunoz.whimfood_ver2.data.Product" />
     </fragment>
 </navigation>

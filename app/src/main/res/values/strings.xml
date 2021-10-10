@@ -58,4 +58,11 @@
     <string name="adress_hint">Dirección</string>
     <string name="Ubicaci">Ubicación</string>
     <string name="boton">Editar perfil</string>
+    <string name="Descripc">Descripción</string>
+    <string name="locat">Ubicación</string>
+    <string name="price">Precio</string>
+    <string name="coment">Agrega tu comentario</string>
+    <string name="hint">hint</string>
+    <string name="textview">TextView</string>
+    <string name="Comentario">Comentario</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -43,19 +44,23 @@ class HomeFragment : Fragment() {
         })
 
 
-        productAdapter = ProductAdapter()
+        productAdapter = ProductAdapter(
+            onItemClicked = { onProductItemClicked(it) })
         binding.productRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@HomeFragment.context)
             adapter = productAdapter
             setHasFixedSize(false)
         }
 
-
         loadFromFirebase()
 
 
 
         return root
+    }
+
+    private fun onProductItemClicked(product: Product) {
+        findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToDetailProductFragment(product= product))
     }
 
 

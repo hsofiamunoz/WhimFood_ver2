@@ -8,6 +8,7 @@ import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +17,18 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.hsofiamunoz.whimfood_ver2.R
 import com.hsofiamunoz.whimfood_ver2.data.Product
+import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.CreateProductFragmentBinding
+import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
 
 class createProductFragment : Fragment() {
@@ -42,6 +48,7 @@ class createProductFragment : Fragment() {
     // Variable para subir la imagen
     private var urlImage :String ?=null
     private val REQUEST_IMAGE_CAPTURE = 1000
+    private lateinit var auth: FirebaseAuth;
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,23 +65,24 @@ class createProductFragment : Fragment() {
         })
 
 
+
+
         // Procedimiento
 
-        with(binding){
-            takePictrureImageView.setOnClickListener{
-                dispatchTakePictureIntent()
-
-            }
-
+        with(binding) {
+                    takePictrureImageView.setOnClickListener {
+                        dispatchTakePictureIntent()
+                    }
             addProductButton.setOnClickListener {
 
                 savePicture()
 
-            }
-        }
+                    }
+                }
 
-        return root
-    }
+                return root
+            }
+
 
     private fun savePicture() {
 
@@ -112,25 +120,62 @@ class createProductFragment : Fragment() {
 
 
 
+
     }
 
     private fun saveProduct(urlPicture: String) {
 
         val name_product = binding.nameProductInputText.text.toString()
+        val location_product = binding.locationProductInputText.text.toString()
+        val description_product = binding.descrptionProductInputText.text.toString()
         val price_product = binding.priceProductInputText.text.toString().toLong()
+        var propietario= ""
+        var propietario_url=""
+        val current_user = Firebase.auth.currentUser
+        var id_usuario = ""
+        current_user?.let {
+            id_usuario = current_user.uid.toString()
+            Log.d("id del user", id_usuario)
+        }
 
-        //Crear un producto de comida
         val db = Firebase.firestore
-        val document = db.collection("product").document()
-        val id = document.id
-        val product1 = Product(id,name_product,price_product,urlPicture)
-        db.collection("product").document(id).set(product1)
+        //Acceder a la BD --------------------------------------------------------------------------
+        db.collection("users")
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    var persona1: UserProfile = document.toObject<UserProfile>()
+                    if (document.id == id_usuario) {
+                        propietario= persona1.name.toString()
+                        propietario_url= persona1.urlPicture.toString()
+                        Log.d("name", document.data.get("name") as String)
 
-        Toast.makeText(requireContext(),"Producto añadido",Toast.LENGTH_SHORT).show()
+                    }
+                }
 
-        binding.nameProductInputText.setText("")
-        binding.priceProductInputText.setText("")
+         //Crear un producto de comida
+         val document = db.collection("product").document()
+         val id = document.id
+         val product1 = Product(
+             id,
+             name_product,
+             location_product,
+             description_product,
+             price_product,
+             urlPicture,
+             propietario,
+             propietario_url
+         )
+         db.collection("product").document(id).set(product1)
 
+         Toast.makeText(requireContext(), "Producto añadido", Toast.LENGTH_SHORT).show()
+
+         binding.nameProductInputText.setText("")
+         binding.priceProductInputText.setText("")
+         binding.locationProductInputText.setText("")
+         binding.descrptionProductInputText.setText("")
+
+            }
     }
 
     private fun dispatchTakePictureIntent() {
