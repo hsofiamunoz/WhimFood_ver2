@@ -7,6 +7,19 @@
     tools:context=".ui.profile.EditProfileFragment" >
 
     <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@string/login1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save_changes_button"
+        app:srcCompat="@drawable/imalogin" />
+
+    <ImageView
         android:id="@+id/take_picture_profile_image_view4"
         android:layout_width="160dp"
         android:layout_height="160dp"
@@ -24,6 +37,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:background="@color/md_indigo_100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/take_picture_profile_image_view4">
@@ -32,6 +46,7 @@
             android:id="@+id/name_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_indigo_100"
             android:hint="@string/name_hint"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +66,7 @@
             android:id="@+id/description_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_indigo_100"
             android:hint="@string/Ubicaci"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="1"
         android:text="@string/save_profile_changes"
@@ -68,7 +84,7 @@
         android:textColorLink="@color/white"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description_text_input_layout" />
 

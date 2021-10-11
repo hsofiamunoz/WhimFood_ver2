@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.profile.EditProfileFragment"
-        android:label="fragment_edit_profile"
+        android:label="Editar perfil"
         tools:layout="@layout/fragment_edit_profile" >
         <action
             android:id="@+id/action_editProfileFragment_to_navigation_home"
@@ -52,10 +52,13 @@
     <fragment
         android:id="@+id/detailProductFragment"
         android:name="com.hsofiamunoz.whimfood_ver2.ui.home.DetailProductFragment"
-        android:label="fragment_detail_product"
+        android:label="Detalle de la publicación"
         tools:layout="@layout/fragment_detail_product" >
         <argument
             android:name="product"
             app:argType="com.hsofiamunoz.whimfood_ver2.data.Product" />
+        <action
+            android:id="@+id/action_detailProductFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
 </navigation>

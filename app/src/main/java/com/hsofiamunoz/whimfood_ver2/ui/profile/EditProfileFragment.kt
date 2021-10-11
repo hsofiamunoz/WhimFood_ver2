@@ -24,6 +24,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import com.hsofiamunoz.whimfood_ver2.IOnBackPressed
 import com.hsofiamunoz.whimfood_ver2.R
 import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentEditProfileBinding
@@ -31,7 +32,8 @@ import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
 import com.hsofiamunoz.whimfood_ver2.ui.createProduct.CreateProductViewModel
 import java.io.ByteArrayOutputStream
 
-class EditProfileFragment : Fragment() {
+class EditProfileFragment : Fragment(){
+
 
     private var _binding: FragmentEditProfileBinding? = null
     private val binding get() = _binding!!
@@ -140,9 +142,18 @@ class EditProfileFragment : Fragment() {
 
     }
     private fun savePicture() {
+        val db = Firebase.firestore
+        val current_user= Firebase.auth.currentUser
+        var id_profile_pict= ""
+        current_user?.let {
+            id_profile_pict = current_user.uid.toString()
+            //Log.d("id del user",id)
+
+        }
 
         val storage = FirebaseStorage.getInstance()
-        val pictureRef = storage.reference.child("users")
+        val pictureRef = storage.reference.child(id_profile_pict.toString())
+
 
         binding.takePictureProfileImageView4.isDrawingCacheEnabled = true
         binding.takePictureProfileImageView4.buildDrawingCache()

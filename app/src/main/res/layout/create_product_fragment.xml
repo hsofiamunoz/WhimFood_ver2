@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.createProduct.createProductFragment" >
 
-    <ImageView
-        android:id="@+id/take_pictrure_image_view"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:contentDescription="@string/imagen"
-        android:src="@drawable/ic_camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/take_pictrure_image_view"
+            android:layout_width="207dp"
+            android:layout_height="209dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/imagen"
+            android:src="@drawable/ic_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/name_product_text_input_layout"
@@ -35,6 +41,7 @@
             android:id="@+id/name_product_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_indigo_100"
             android:hint="@string/name_product_hint"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -54,6 +61,7 @@
             android:id="@+id/price_product_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_indigo_100"
             android:hint="@string/prie_product_hint"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -73,24 +81,27 @@
             android:id="@+id/descrption_product_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_indigo_100"
             android:hint="@string/Descripc"
             tools:ignore="TextContrastCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/add_product_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="153dp"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="154dp"
-        android:text="@string/add_product"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descrption_product_text_input_layout" />
+        <Button
+            android:id="@+id/add_product_button"
+            android:layout_width="186dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/add_product"
+            android:textColor="@color/white"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descrption_product_text_input_layout" />
 
-    <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/location_product_text_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,7 +116,27 @@
             android:id="@+id/location_product_input_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/md_indigo_100"
             android:hint="@string/locat"
             tools:ignore="TextContrastCheck" />
+
     </com.google.android.material.textfield.TextInputLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textColor="#1F177D"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_product_button" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

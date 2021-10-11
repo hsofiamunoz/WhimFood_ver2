@@ -115,6 +115,7 @@ class createProductFragment : Fragment() {
                 // Se guardan los cambios
                 saveProduct(downloadUri.toString())
             } else {
+                Toast.makeText(requireContext(),"Debe ingresar foto",Toast.LENGTH_SHORT)
                 // Handle failures
                 // ...
             }
@@ -130,62 +131,73 @@ class createProductFragment : Fragment() {
         val name_product = binding.nameProductInputText.text.toString()
         val location_product = binding.locationProductInputText.text.toString()
         val description_product = binding.descrptionProductInputText.text.toString()
-        val price_product = binding.priceProductInputText.text.toString().toLong()
-        var propietario= ""
-        var propietario_url=""
-        val current_user = Firebase.auth.currentUser
-        var id_usuario = ""
-        var propietario_id =""
-        current_user?.let {
-            id_usuario = current_user.uid.toString()
-            Log.d("id del user", id_usuario)
+        val price_product = binding.priceProductInputText.text.toString()
+
+        if(name_product.isNullOrEmpty() || location_product.isNullOrEmpty() || description_product.isNullOrEmpty() || price_product.isNullOrEmpty()){
+            Toast.makeText(requireContext(),"Debe ingresar parametros",Toast.LENGTH_SHORT)
         }
-
-        val db = Firebase.firestore
-        //Acceder a la BD --------------------------------------------------------------------------
-        db.collection("users")
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    var persona1: UserProfile = document.toObject<UserProfile>()
-                    if (document.id == id_usuario) {
-                        propietario_id= id_usuario
-                        propietario= persona1.name.toString()
-                        propietario_url= persona1.urlPicture.toString()
-                        Log.d("name", document.data.get("name") as String)
-
-                    }
-                }
-
-         //Crear un producto de comida
-         val document = db.collection("product").document()
-         val id = document.id
-         val product1 = Product(
-             id,
-             name_product,
-             location_product,
-             description_product,
-             price_product,
-             urlPicture,
-             propietario,
-             propietario_url,
-             propietario_id
-         )
-         db.collection("product").document(id).set(product1)
-
-         Toast.makeText(requireContext(), "Producto añadido", Toast.LENGTH_SHORT).show()
-
-         val perfil = ProfileInfo(url_product_pic = urlPicture,id = propietario_id,propietario_id= propietario_id)
-         val document2 = db.collection("PerfilesIndiv").document()
-         val id2 = document2.id
-         db.collection("PerfilesIndiv").document(id2).set(perfil)
-
-         binding.nameProductInputText.setText("")
-         binding.priceProductInputText.setText("")
-         binding.locationProductInputText.setText("")
-         binding.descrptionProductInputText.setText("")
-
+        else {
+            val price_product = binding.priceProductInputText.text.toString().toLong()
+            var propietario = ""
+            var propietario_url = ""
+            val current_user = Firebase.auth.currentUser
+            var id_usuario = ""
+            var propietario_id = ""
+            current_user?.let {
+                id_usuario = current_user.uid.toString()
+                Log.d("id del user", id_usuario)
             }
+
+            val db = Firebase.firestore
+            //Acceder a la BD --------------------------------------------------------------------------
+            db.collection("users")
+                .get()
+                .addOnSuccessListener { result ->
+                    for (document in result) {
+                        var persona1: UserProfile = document.toObject<UserProfile>()
+                        if (document.id == id_usuario) {
+                            propietario_id = id_usuario
+                            propietario = persona1.name.toString()
+                            propietario_url = persona1.urlPicture.toString()
+                            Log.d("name", document.data.get("name") as String)
+
+                        }
+                    }
+
+                    //Crear un producto de comida
+                    val document = db.collection("product").document()
+                    val id = document.id
+                    val product1 = Product(
+                        id,
+                        name_product,
+                        location_product,
+                        description_product,
+                        price_product,
+                        urlPicture,
+                        propietario,
+                        propietario_url,
+                        propietario_id
+                    )
+                    db.collection("product").document(id).set(product1)
+
+                    Toast.makeText(requireContext(), "Producto añadido", Toast.LENGTH_SHORT).show()
+
+                    val perfil = ProfileInfo(
+                        url_product_pic = urlPicture,
+                        id = propietario_id,
+                        propietario_id = propietario_id
+                    )
+                    val document2 = db.collection("PerfilesIndiv").document()
+                    val id2 = document2.id
+                    db.collection("PerfilesIndiv").document(id2).set(perfil)
+
+                    binding.nameProductInputText.setText("")
+                    binding.priceProductInputText.setText("")
+                    binding.locationProductInputText.setText("")
+                    binding.descrptionProductInputText.setText("")
+
+                }
+        }
     }
 
     private fun dispatchTakePictureIntent() {

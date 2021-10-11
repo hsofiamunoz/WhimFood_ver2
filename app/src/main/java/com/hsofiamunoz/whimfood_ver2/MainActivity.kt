@@ -14,6 +14,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.hsofiamunoz.whimfood_ver2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    override fun onBackPressed() {
+        val fragment =
+            this.supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main)
+        (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let {
+            super.onBackPressed()
+        }
+    }
 
     private lateinit var binding: ActivityMainBinding
 
