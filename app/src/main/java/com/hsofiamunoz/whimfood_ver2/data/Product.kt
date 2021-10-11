@@ -10,6 +10,7 @@ class Product (
     var product_price: Long?=null,
     val url_product_pic: String?= null,
     val propietario: String?=null,
-    val propietario_url: String?=null
+    val propietario_url: String?=null,
+    val propietario_id: String?=null
 
 ):Serializable

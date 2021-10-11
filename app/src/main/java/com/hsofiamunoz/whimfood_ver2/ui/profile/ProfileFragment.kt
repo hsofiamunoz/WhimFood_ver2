@@ -11,14 +11,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import com.hsofiamunoz.whimfood_ver2.data.Product
+import com.hsofiamunoz.whimfood_ver2.data.ProfileInfo
 import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
+import com.hsofiamunoz.whimfood_ver2.ui.home.HomeFragmentDirections
+import com.hsofiamunoz.whimfood_ver2.ui.home.ProductAdapter
 import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
@@ -27,6 +32,9 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var profileAdapter: ProfileAdapter
+    private lateinit var productAdapter: ProductAdapter
 
     private lateinit var auth: FirebaseAuth;
 
@@ -46,7 +54,6 @@ class ProfileFragment : Fragment() {
         profileViewModel.text.observe(viewLifecycleOwner, Observer {
             //textView.text = it
         })
-
 
         val current_user = Firebase.auth.currentUser
         var email = ""
@@ -86,6 +93,18 @@ class ProfileFragment : Fragment() {
                 Log.w("Error", "Error getting documents.", exception)
             }
 
+        // --- Adapter para carggar informcación ----------------------------------------------------
+
+        profileAdapter = ProfileAdapter()
+        binding.profileRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@ProfileFragment.context)
+            adapter = profileAdapter
+            setHasFixedSize(false)
+        }
+
+
+        FiltroImagenes(id)
+
         // -----------------------------------------------------------------------------------------
 
         binding.editProfileButton.setOnClickListener {
@@ -94,6 +113,32 @@ class ProfileFragment : Fragment() {
 
         return root
     }
+
+    private fun onProductItemClicked(product: Product) {
+
+    }
+
+    private fun FiltroImagenes(id_user:String) {
+
+        //Cargar la base de datos
+        val db = Firebase.firestore
+
+        db.collection("PerfilesIndiv").get().addOnSuccessListener { result ->
+            var listProfile : MutableList<ProfileInfo> = arrayListOf()
+            for (document in result){
+                if(document.data.get("propietario_id").toString()== id_user){
+                Log.d("product",document.data.toString())
+                    listProfile.add(document.toObject<ProfileInfo>())
+
+            }
+            profileAdapter.appendItems(listProfile)
+            Log.d("Agregado",profileAdapter.toString())
+        }
+
+
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

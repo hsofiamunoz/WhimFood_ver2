@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "535142815400",
+    "project_id": "finalfinal-936cd",
+    "storage_bucket": "finalfinal-936cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:535142815400:android:2338dac45c500c29f9149d",
+        "android_client_info": {
+          "package_name": "com.hsofiamunoz.whimfood_ver2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "535142815400-l4tkcvvmhldmakhbqgkikbjg8mpipign.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbXFAJBCBkDV9zZ35kzeQ1nCRCWG-Rdyk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "535142815400-l4tkcvvmhldmakhbqgkikbjg8mpipign.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

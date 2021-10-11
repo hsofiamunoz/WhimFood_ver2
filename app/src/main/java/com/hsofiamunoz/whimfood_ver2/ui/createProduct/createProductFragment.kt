@@ -26,11 +26,12 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import com.hsofiamunoz.whimfood_ver2.R
 import com.hsofiamunoz.whimfood_ver2.data.Product
+import com.hsofiamunoz.whimfood_ver2.data.ProfileInfo
 import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.CreateProductFragmentBinding
 import com.squareup.picasso.Picasso
 import java.io.ByteArrayOutputStream
-
+private var const=100
 class createProductFragment : Fragment() {
 
     companion object {
@@ -50,6 +51,7 @@ class createProductFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1000
     private lateinit var auth: FirebaseAuth;
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +65,6 @@ class createProductFragment : Fragment() {
         viewModel.text.observe(viewLifecycleOwner, Observer {
 
         })
-
 
 
 
@@ -87,7 +88,8 @@ class createProductFragment : Fragment() {
     private fun savePicture() {
 
         val storage = FirebaseStorage.getInstance()
-        val pictureRef = storage.reference.child("product")
+        const= const+1
+        val pictureRef = storage.reference.child("product" + const.toString())
 
         binding.takePictrureImageView.isDrawingCacheEnabled = true
         binding.takePictrureImageView.buildDrawingCache()
@@ -133,6 +135,7 @@ class createProductFragment : Fragment() {
         var propietario_url=""
         val current_user = Firebase.auth.currentUser
         var id_usuario = ""
+        var propietario_id =""
         current_user?.let {
             id_usuario = current_user.uid.toString()
             Log.d("id del user", id_usuario)
@@ -146,6 +149,7 @@ class createProductFragment : Fragment() {
                 for (document in result) {
                     var persona1: UserProfile = document.toObject<UserProfile>()
                     if (document.id == id_usuario) {
+                        propietario_id= id_usuario
                         propietario= persona1.name.toString()
                         propietario_url= persona1.urlPicture.toString()
                         Log.d("name", document.data.get("name") as String)
@@ -164,11 +168,17 @@ class createProductFragment : Fragment() {
              price_product,
              urlPicture,
              propietario,
-             propietario_url
+             propietario_url,
+             propietario_id
          )
          db.collection("product").document(id).set(product1)
 
          Toast.makeText(requireContext(), "Producto añadido", Toast.LENGTH_SHORT).show()
+
+         val perfil = ProfileInfo(url_product_pic = urlPicture,id = propietario_id,propietario_id= propietario_id)
+         val document2 = db.collection("PerfilesIndiv").document()
+         val id2 = document2.id
+         db.collection("PerfilesIndiv").document(id2).set(perfil)
 
          binding.nameProductInputText.setText("")
          binding.priceProductInputText.setText("")
@@ -185,6 +195,7 @@ class createProductFragment : Fragment() {
             }
         }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
         if(requestCode== REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
