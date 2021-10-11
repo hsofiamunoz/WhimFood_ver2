@@ -3,7 +3,6 @@ package com.hsofiamunoz.whimfood_ver2.ui.profile
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Picture
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -14,7 +13,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
@@ -24,12 +22,8 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import com.hsofiamunoz.whimfood_ver2.IOnBackPressed
-import com.hsofiamunoz.whimfood_ver2.R
 import com.hsofiamunoz.whimfood_ver2.data.UserProfile
 import com.hsofiamunoz.whimfood_ver2.databinding.FragmentEditProfileBinding
-import com.hsofiamunoz.whimfood_ver2.databinding.FragmentProfileBinding
-import com.hsofiamunoz.whimfood_ver2.ui.createProduct.CreateProductViewModel
 import java.io.ByteArrayOutputStream
 
 class EditProfileFragment : Fragment(){
